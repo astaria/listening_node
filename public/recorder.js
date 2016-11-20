@@ -23,6 +23,10 @@
     window.stopRecording = function() {
       recording = false;
       window.Stream.end();
+      $('#recording').attr('disabled', 'disabled');
+      window.setTimeout(function() {
+        window.location.reload();
+      }, 5000);
     }
 
     function success(e) {
@@ -57,3 +61,15 @@
     }
   });
 })(this);
+
+$(document).ready(function() {
+  $('#recording').click(function() {
+    if ($('#recording').text() == 'Start Recording') {
+      startRecording();
+      $('#recording').html('Stop Recording');
+    } else {
+      stopRecording();
+      $('#recording').html('Start Recording');
+    }
+  });
+});
